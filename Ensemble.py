@@ -2,9 +2,12 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from keras.models import load_model
+import os
 
-model = load_model("./weights/dense_NET.h5")
-model_2 = load_model("./weights/inception_v3.h5")
+
+MODEL_PTH = os.getcwd()
+model = load_model(MODEL_PTH+"/weights/dense_NET.h5")
+model_2 = load_model(MODEL_PTH+"/weights/inception_v3.h5")
 
 class Ensemble:
 
