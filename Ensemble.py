@@ -6,8 +6,8 @@ import os
 
 
 MODEL_PTH = os.getcwd()
-model = load_model(MODEL_PTH+"/weights/dense_NET.h5")
-model_2 = load_model(MODEL_PTH+"/weights/inception_v3.h5")
+model = load_model(MODEL_PTH+"/weights/Dense_net.h5")
+model_2 = load_model(MODEL_PTH+"/weights/incpetion_v3.h5")
 
 class Ensemble:
 
@@ -18,7 +18,7 @@ class Ensemble:
         #plt.show()
         
         #128 DenseNet
-        new_img_array = cv2.resize(img_array, (128, 128))
+        new_img_array = cv2.resize(img_array, (224, 224))
         #new_img_array = img_array.resize((128,128))
         dt = []
         dt.append(new_img_array)
@@ -40,10 +40,5 @@ class Ensemble:
         weighted_preds = np.tensordot(preds, weights, axes=((0),(0)))
 
 
-        if weighted_preds > 0.5:
-            print("COVID")
-            return "1"
-        else:
-            print("NORMAL")
-            return "0"
+        return str(np.argmax(weighted_preds,axis=1))
 
